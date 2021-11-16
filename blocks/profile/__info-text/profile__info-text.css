@@ -1,0 +1,6 @@
+.profile__info-text {
+    display: flex;
+    min-width: 336px;
+    justify-content: space-between;
+    align-items: center;
+}

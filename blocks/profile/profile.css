@@ -1,0 +1,9 @@
+.profile {
+    display: flex;
+    margin: auto;
+    color: #fff;
+    padding-top: 40px;
+    width: 68.75%;
+    height: 120px;
+}
+

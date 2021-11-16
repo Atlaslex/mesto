@@ -1,0 +1,6 @@
+.elements__like_off {
+    background-image: url(./elements__like_off.svg);
+    background-size: cover;
+    width: 22px;
+    height: 19px;
+}
