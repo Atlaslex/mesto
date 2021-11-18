@@ -19,3 +19,13 @@
 @import url(../blocks/elements/__element-img/elements__element-img.css);
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
+@import url(../blocks/popup/popup.css);
+@import url(../blocks/popup/__container/popup__container.css);
+@import url(../blocks/popup/__opened/popap__opened.css);
+@import url(../blocks/form/form.css);
+@import url(../blocks/form/__title/form__title.css);
+@import url(../blocks/form/__input/form__input.css);
+@import url(../blocks/form/__item/form__item.css);
+@import url(../blocks/form/__vocation/form__vocation.css);
+@import url(../blocks/form/__save/form__save.css);
+@import url(../blocks/popup/__close/popup__close.css);

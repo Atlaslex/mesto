@@ -10,6 +10,19 @@
 
 <body class="body">
   <div class="page">
+    <section class="popup popap__opened">
+      <div class="popup__container">
+        <img class="popup__close" src="./blocks/popup/__close/close-Icon.png" alt="Закрыть">
+        <form class="form">
+          <h2 class="form__title">Редактировать профиль</h2>
+          <fieldset class="form__input">
+            <input class="form__item form__name" type="text" name="name" value="Жак-Ив Кусто">
+            <input class="form__item form__vocation" type="text" name="vocation" value="Исследователь океана">
+            <input class="form__save" type="submit" name="save" value="Сохранить">
+          </fieldset>
+        </form>
+      </div>
+    </section>
     <header class="header">
       <div class="header__logo"></div>
 
@@ -82,8 +95,8 @@
     <footer class="footer">
       <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
     </footer>
-  </div>
 
+  </div>
 </body>
 
 </html>
