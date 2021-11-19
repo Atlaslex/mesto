@@ -6,3 +6,16 @@ margin: 0;
 
 
 }
+
+@media screen and (max-width: 620px) {
+    .form__title {
+        font-size: 18px;
+        font-weight: 900;
+        line-height: 22px;
+      }
+    }
+
+
+
+
+
