@@ -6,6 +6,9 @@
     align-self: center;
     margin-left: auto;
 }
+.profile__add-button:hover {
+  cursor: pointer;
+}
 
 @media screen and (max-width: 968px) {
     .profile__add-button {
