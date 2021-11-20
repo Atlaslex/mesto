@@ -1,20 +1,18 @@
 .header {
-    margin: auto;
-    padding-top: 45px;
-    width: 68.75%;
-    min-height: 74px;
-    border-bottom: 1px solid #545454;
-    opacity: 0.7;
+  margin: auto;
+  padding-top: 45px;
+  width: 68.75%;
+  min-height: 74px;
+  border-bottom: 1px solid rgba(84, 84, 84, .7);
+
+}
+
+
+@media screen and (max-width: 320px) {
+  .header {
+    padding: 0;
+    min-height: 56px;
+    width: 320px;
   }
-  
-  
-  @media screen and (max-width: 320px) {
-      .header {
-        padding: 0;
-        padding-bottom: 27px;
-        min-height: 56px;
-        width: 320px;
-      }
-  
-    }
-  
+
+}

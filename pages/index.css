@@ -29,5 +29,5 @@
 @import url(../blocks/form/__vocation/form__vocation.css);
 @import url(../blocks/form/__save/form__save.css);
 @import url(../blocks/popup/__close/popup__close.css);
-@import url(../blocks/popup/__opened/popap__opened.css);
+@import url(../blocks/popup/_opened/popap_opened.css);
 @import url(../blocks/popup/__overlay/popup__overlay.css);
