@@ -1,14 +1,12 @@
 .form__input {
   padding: 0;
-  margin: 42px 0;
+  margin: 40px 0 37px;
   display: flex;
   flex-direction: column;
   border: none;
-  font-family: Inter;
   font-size: 14px;
   font-weight: 400;
-  line-height: 17px;
-
+  
 }
 
 @media screen and (max-width: 620px) {
