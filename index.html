@@ -10,93 +10,83 @@
 
 <body class="body">
   <div class="page">
-    <section class="popup">
-      <div class="popup__container">
-        <img class="popup__close" src="./blocks/popup/__close/close-Icon.png" alt="Закрыть">
-        <form class="form">
-          <h2 class="form__title">Редактировать профиль</h2>
-          <fieldset class="form__input">
-            <input class="form__item form__name" type="text" name="name" value="Жак-Ив Кусто">
-            <input class="form__item form__vocation" type="text" name="vocation" value="Исследователь океана">
-            <input class="form__save" type="submit" name="save" value="Сохранить">
-          </fieldset>
-        </form>
-      </div>
-    </section>
     <header class="header">
       <div class="header__logo"></div>
-
     </header>
-
     <main class="content">
       <section class="profile">
         <div class="profile__avatar"></div>
         <div class="profile__info">
           <div class="profile__info-text">
-            <p class="profile__cousteau">Жак-Ив Кусто</p>
-            <button class="profile__edit-button"></button>
+            <h1 class="profile__cousteau">Жак-Ив Кусто</h1>
+            <button class="profile__edit-button" type="button"></button>
           </div>
           <p class="profile__annotation">Исследователь океана</p>
         </div>
-        <div class="profile__add-button"></div>
+        <button class="profile__add-button" type="button"></button>
       </section>
       <section class="elements">
         <div class="element">
-          <img class="elements__element-img" src="./blocks/elements/__element-img/kalen-emsley.jpg" alt="Кален Эмсли">
-          <div class="elements__text-like">
-            <p class="elements__text">Кален Эмсли</p>
-            <div class="element__like element__like_off"></div>
+          <img class="element__element-img" src="./blocks/element/__element-img/kalen-emsley.jpg" alt="Кален Эмсли">
+          <div class="element__text-like">
+            <h2 class="element__text">Кален Эмсли</h2>
+            <button class="element__like" type="button"></button>
           </div>
         </div>
-
         <div class="element">
-          <img class="elements__element-img" src="./blocks/elements/__element-img/oslo.jpg" alt="Осло. Норвегия">
-          <div class="elements__text-like">
-            <p class="elements__text">Осло. Норвегия</p>
-            <div class="element__like element__like_off"></div>
+          <img class="element__element-img" src="./blocks/element/__element-img/oslo.jpg" alt="Осло. Норвегия">
+          <div class="element__text-like">
+            <h2 class="element__text">Осло. Норвегия</h2>
+            <button class="element__like" type="button"></button>
           </div>
         </div>
-
         <div class="element">
-          <img class="elements__element-img" src="./blocks/elements/__element-img/madeyra.jpg" alt="Мадейра">
-          <div class="elements__text-like">
-            <p class="elements__text">Остров Мадейра. Португалия</p>
-            <div class="element__like element__like_off"></div>
+          <img class="element__element-img" src="./blocks/element/__element-img/madeyra.jpg" alt="Мадейра">
+          <div class="element__text-like">
+            <h2 class="element__text">Остров Мадейра. Португалия</h2>
+            <button class="element__like" type="button"></button>
           </div>
         </div>
-
         <div class="element">
-          <img class="elements__element-img" src="./blocks/elements/__element-img/italia.jpg" alt="Италия">
-          <div class="elements__text-like">
-            <p class="elements__text">Италия</p>
-            <div class="element__like element__like_off"></div>
+          <img class="element__element-img" src="./blocks/element/__element-img/italia.jpg" alt="Италия">
+          <div class="element__text-like">
+            <h2 class="element__text">Италия</h2>
+            <button class="element__like" type="button"></button>
           </div>
         </div>
-
         <div class="element">
-          <img class="elements__element-img" src="./blocks/elements/__element-img/brit.jpg"
+          <img class="element__element-img" src="./blocks/element/__element-img/brit.jpg"
             alt="Уитчемптон, Уимборн, Великобритания">
-          <div class="elements__text-like">
-            <p class="elements__text">Уимборн. Великобритания</p>
-            <div class="element__like element__like_off"></div>
+          <div class="element__text-like">
+            <h2 class="element__text">Уимборн. Великобритания</h2>
+            <button class="element__like" type="button"></button>
           </div>
         </div>
-
         <div class="element">
-          <img class="elements__element-img" src="./blocks/elements/__element-img/iceland.jpg" alt="Исландия">
-          <div class="elements__text-like">
-            <p class="elements__text">Исландия</p>
-            <div class="element__like element__like_off"></div>
+          <img class="element__element-img" src="./blocks/element/__element-img/iceland.jpg" alt="Исландия">
+          <div class="element__text-like">
+            <h2 class="element__text">Исландия</h2>
+            <button class="element__like" type="button"></button>
           </div>
         </div>
       </section>
-
     </main>
-
     <footer class="footer">
       <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
     </footer>
-
+  </div>
+  <div class="popup">
+    <div class="popup__container">
+      <button class="popup__close" type="button"></button>
+      <form class="form" name="edit-profile">
+        <h2 class="form__title">Редактировать профиль</h2>
+        <fieldset class="form__input">
+          <input class="form__item form__item_type_name" type="text" name="name" value="Жак-Ив Кусто">
+          <input class="form__item form__item_type_vocation" type="text" name="vocation" value="Исследователь океана">
+          <button class="form__save" type="submit" name="save">Сохранить</button>
+        </fieldset>
+      </form>
+    </div>
   </div>
   <script src="./scripts/index.js"></script>
 </body>
