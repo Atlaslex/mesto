@@ -30,11 +30,13 @@ popupCloseButton.addEventListener('click', close);
 formElement.addEventListener('submit', formSubmitHandler);
 
 
+const templateEl = document.querySelector('.template');
+const listContainerEl = document.querySelector('.elements');
 
 const initialCards = [
   {
     name: 'Кален Эмсли',
-    link: './blocks/element/__element-img/kalen-emsley.jpg'
+    link: './blocks/element/__element-img/kalen-emsle.jpg'
   },
   {
     name: 'Осло. Норвегия',
@@ -57,3 +59,30 @@ const initialCards = [
     link: './blocks/element/__element-img/iceland.jpg'
   }
 ]; 
+
+
+function render() {
+    const html = initialCards
+        .map((item, idx, arr) => {
+            return getItem(item);
+        });
+
+    listContainerEl.append(...html);
+}
+
+
+
+function getItem(item) {
+    const newItem = templateEl.content.cloneNode(true);
+    const headerEl = newItem.querySelector('.element__text');
+    const imgEl = newItem.querySelector('.element__element-img')
+    headerEl.textContent = item.name;
+    imgEl.src = item.link;
+    imgEl.alt = headerEl.textContent;
+
+    
+    return newItem;
+}
+
+
+ render();
