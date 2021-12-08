@@ -1,4 +1,4 @@
-.profile__annotation {
+.profile__subtitle {
   font-size: 18px;
   font-weight: 400;
   line-height: 22px;
@@ -10,14 +10,14 @@
 }
 
 @media screen and (max-width: 750px) {
-  .profile__annotation {
+  .profile__subtitle {
     text-align: center;
 
   }
 }
 
 @media screen and (max-width: 620px) {
-  .profile__annotation {
+  .profile__subtitle {
     font-size: 14px;
     font-weight: 400;
     line-height: 17px;
