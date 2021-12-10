@@ -31,52 +31,57 @@ let placeInput = document.querySelector('[name="place_name"]');
 let linkInput = document.querySelector('[name="place_link"]');
 
 const templateEl = document.querySelector('.template');
-const listContainerEl = document.querySelector('.elements');
+const cardsContainerEl = document.querySelector('.elements');
 
-// Popap edit form
+// Popup edit form
 const formElementTypeEdit = document.querySelector('.form_type_edit');
 const profileTitle = document.querySelector('.profile__title');
 const profileSubtitle = document.querySelector('.profile__subtitle');
-const popapEditCloseButton = document.querySelector('.popup__close');
+const popupEditCloseButton = document.querySelector('.popup__close');
 const profileEditButton = document.querySelector('.profile__edit-button');
-const popapTypeEditProfile = document.querySelector('.popup_type_edit-profile');
+const popupTypeEditProfile = document.querySelector('.popup_type_edit-profile');
 const inputName = document.querySelector('.form__item_type_name')
 const inputJob = document.querySelector('.form__item_type_job')
 
-// Popap add form
+// Popup add form
 const formElementTypeAdd = document.querySelector('.form_type_add');
 const profileAddButton = document.querySelector('.profile__add-button');
-const popapTypeAddCard = document.querySelector('.popup_type_add-card');
-const popapAddCloseButton = popapTypeAddCard.querySelector('.popup__close');
-const newLocationName = popapTypeAddCard.querySelector('.form__item_type_location-name');
-const linkImg = popapTypeAddCard.querySelector('.form__item_type_link-img');
+const popupTypeAddCard = document.querySelector('.popup_type_add-card');
+const popupAddCloseButton = popupTypeAddCard.querySelector('.popup__close');
+const newLocationName = popupTypeAddCard.querySelector('.form__item_type_location-name');
+const linkImg = popupTypeAddCard.querySelector('.form__item_type_link-img');
+
+const popupImageItem = document.querySelector('.popup_type_img');
+const popupImageCloseButton = popupImageItem.querySelector('.popup__close');
 // Open form edit profile
 profileEditButton.addEventListener('click', function () {
   inputName.value = profileTitle.textContent;
   inputJob.value = profileSubtitle.textContent;
-  openPopup(popapTypeEditProfile);
+  openPopup(popupTypeEditProfile);
 });
 
-// Popap close edit form
-popapEditCloseButton.addEventListener('click', function () {
-  closePopup(popapTypeEditProfile);
+// Popup close edit form
+popupEditCloseButton.addEventListener('click', function () {
+  closePopup(popupTypeEditProfile);
 });
 
 // Open form add profile
 profileAddButton.addEventListener('click', function () {
-  openPopup(popapTypeAddCard);
+  openPopup(popupTypeAddCard);
 })
 
-// Popap close add form
-popapAddCloseButton.addEventListener('click', function () {
-  closePopup(popapTypeAddCard);
+// Popup close add form
+popupAddCloseButton.addEventListener('click', function () {
+  closePopup(popupTypeAddCard);
 });
 
+popupImageCloseButton.addEventListener('click', function () {
+  closePopup(popupImageItem);
+});
 
 function openPopup(evt) {
   evt.classList.add('popap_opened');
   }
-
 
 function closePopup(evt) {
   evt.classList.remove('popap_opened');
@@ -86,32 +91,20 @@ function formEditHandler(evt) {
   evt.preventDefault();
   profileTitle.textContent = inputName.value;
   profileSubtitle.textContent = inputJob.value;
-  closePopup(popapTypeEditProfile);
+  closePopup(popupTypeEditProfile);
 }
 
 function formAddHandler(evt) {
   evt.preventDefault();
   let inputNewLocationName = newLocationName.value;
   let inputlinkImg = linkImg.value;
-  closePopup(popapTypeAddCard);
+  let card = getItem({name: inputNewLocationName, link: inputlinkImg});
+  cardsContainerEl.prepend(card);
+  newLocationName.value = '';
+  linkImg.value = '';
+
+  closePopup(popupTypeAddCard);
 }
-
-// function handleAdd(evt) {  
-//   evt.preventDefault(); 
-
-//   const inputPostTitle = postTitle.value;
-//   const inputPostImage = postImage.value;
-//   const cardItem = getItem({name: inputPostTitle, imageSource: inputPostImage});
-  
-//   cardsContainerEl.prepend(cardItem);
-
-//   postTitle.value = '';
-//   postImage.value = '';
-  
-//   closePopup(popupAddPost);
-// }
-
-
 
 formElementTypeEdit.addEventListener('submit', formEditHandler);
 formElementTypeAdd.addEventListener('submit', formAddHandler);
@@ -120,20 +113,45 @@ function render() {
   const html = initialCards
     .map(getItem)
   
-    listContainerEl.append(...html);
+    cardsContainerEl.append(...html);
 }
 
 function getItem(item) {
     const newItem = templateEl.content.cloneNode(true);
     const headerEl = newItem.querySelector('.element__text');
     const imgEl = newItem.querySelector('.element__element-img')
+    const likeButton = newItem.querySelector('.element__like');
+    const delitButton = newItem.querySelector('.element__delete-button');
+    const imagePopup = document.querySelector('.popup__image');
+    const titlePopup = document.querySelector('.popup__title');
+    
     headerEl.textContent = item.name;
     imgEl.src = item.link;
     imgEl.alt = headerEl.textContent;
 
-    
+    likeButton.addEventListener('click', like);
+    delitButton.addEventListener('click', deleteCard);
+
+    imgEl.addEventListener('click', function() {
+      imagePopup.setAttribute('src', item.link);
+      imagePopup.setAttribute('alt', item.imageAlt);
+      titlePopup.textContent = item.name;
+  
+      openPopup(popupImageItem);
+    });
     return newItem;
 }
 
+function like (evt) {
+  const eventTarget = evt.target;
 
+  eventTarget.classList.toggle('element__like_on');
+}
+
+function deleteCard (evt) {
+  const eventTarget = evt.target;
+  const cardItem = eventTarget.closest('.element');
+  
+  cardItem.remove();
+}
  render();

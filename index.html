@@ -97,20 +97,32 @@
         <h2 class="form__title">Новое место</h2>
         <fieldset class="form__input">
           <input class="form__item form__item_type_location-name" type="text" name="place_name" placeholder="Название">
-          <input class="form__item form__item_type_link-img" type="text" name="place_link" placeholder="Сылка на картинку">
+          <input class="form__item form__item_type_link-img" type="text" name="place_link"
+            placeholder="Сылка на картинку">
           <button class="form__save" type="submit" name="save">Создать</button>
         </fieldset>
       </form>
     </div>
   </div>
 
+  <div class="popup popup_type_img">
+    <div class="popup__img-container">
+      <button class="popup__close" type="button"></button>
+      <div class="popup__img-title">
+        <img src alt class="popup__image">
+        <h2 class="popup__title"></h2>
+      </div>
+    </div>
+  </div>
+
   <template class="template">
     <li class="element">
-      <img class="element__element-img" src="" alt="">
+      <img class="element__element-img">
       <div class="element__text-like">
         <h2 class="element__text"></h2>
         <button class="element__like" type="button"></button>
       </div>
+      <button class="element__delete-button" type="button"></button>
     </li>
   </template>
 </body>
