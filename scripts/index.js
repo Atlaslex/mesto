@@ -27,8 +27,8 @@ const initialCards = [
 
 
 
-let placeInput = document.querySelector('[name="place_name"]');
-let linkInput = document.querySelector('[name="place_link"]');
+const placeInput = document.querySelector('[name="place_name"]');
+const linkInput = document.querySelector('[name="place_link"]');
 
 const templateEl = document.querySelector('.template');
 const cardsContainerEl = document.querySelector('.elements');
@@ -53,6 +53,9 @@ const linkImg = popupTypeAddCard.querySelector('.form__item_type_link-img');
 
 const popupImageItem = document.querySelector('.popup_type_img');
 const popupImageCloseButton = popupImageItem.querySelector('.popup__close');
+
+const imagePopup = document.querySelector('.popup__image');
+const titlePopup = document.querySelector('.popup__title');
 // Open form edit profile
 profileEditButton.addEventListener('click', function () {
   inputName.value = profileTitle.textContent;
@@ -87,14 +90,14 @@ function closePopup(evt) {
   evt.classList.remove('popap_opened');
 }
 
-function formEditHandler(evt) {
+function handleFormEdit(evt) {
   evt.preventDefault();
   profileTitle.textContent = inputName.value;
   profileSubtitle.textContent = inputJob.value;
   closePopup(popupTypeEditProfile);
 }
 
-function formAddHandler(evt) {
+function handleFormAdd(evt) {
   evt.preventDefault();
   let inputNewLocationName = newLocationName.value;
   let inputlinkImg = linkImg.value;
@@ -106,8 +109,8 @@ function formAddHandler(evt) {
   closePopup(popupTypeAddCard);
 }
 
-formElementTypeEdit.addEventListener('submit', formEditHandler);
-formElementTypeAdd.addEventListener('submit', formAddHandler);
+formElementTypeEdit.addEventListener('submit', handleFormEdit);
+formElementTypeAdd.addEventListener('submit', handleFormAdd);
 
 function render() {
   const html = initialCards
@@ -122,9 +125,7 @@ function getItem(item) {
     const imgEl = newItem.querySelector('.element__element-img')
     const likeButton = newItem.querySelector('.element__like');
     const delitButton = newItem.querySelector('.element__delete-button');
-    const imagePopup = document.querySelector('.popup__image');
-    const titlePopup = document.querySelector('.popup__title');
-    
+        
     headerEl.textContent = item.name;
     imgEl.src = item.link;
     imgEl.alt = headerEl.textContent;
