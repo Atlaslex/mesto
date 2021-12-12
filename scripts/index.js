@@ -99,9 +99,9 @@ function handleFormEdit(evt) {
 
 function handleFormAdd(evt) {
   evt.preventDefault();
-  let inputNewLocationName = newLocationName.value;
-  let inputlinkImg = linkImg.value;
-  let card = getItem({name: inputNewLocationName, link: inputlinkImg});
+  const inputNewLocationName = newLocationName.value;
+  const inputlinkImg = linkImg.value;
+  const card = getItem({name: inputNewLocationName, link: inputlinkImg});
   cardsContainerEl.prepend(card);
   newLocationName.value = '';
   linkImg.value = '';
