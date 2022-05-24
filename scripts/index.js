@@ -23,7 +23,7 @@ const initialCards = [
     name: 'Исландия',
     link: './blocks/element/__element-img/iceland.jpg'
   }
-]; 
+];
 
 
 
@@ -115,7 +115,7 @@ formElementTypeAdd.addEventListener('submit', handleFormAdd);
 function render() {
   const html = initialCards
     .map(getItem)
-  
+
     cardsContainerEl.append(...html);
 }
 
@@ -125,7 +125,7 @@ function getItem(item) {
     const imgEl = newItem.querySelector('.element__element-img')
     const likeButton = newItem.querySelector('.element__like');
     const delitButton = newItem.querySelector('.element__delete-button');
-        
+
     headerEl.textContent = item.name;
     imgEl.src = item.link;
     imgEl.alt = headerEl.textContent;
@@ -137,7 +137,7 @@ function getItem(item) {
       imagePopup.setAttribute('src', item.link);
       imagePopup.setAttribute('alt', item.imageAlt);
       titlePopup.textContent = item.name;
-  
+
       openPopup(popupImageItem);
     });
     return newItem;
@@ -152,7 +152,11 @@ function like (evt) {
 function deleteCard (evt) {
   const eventTarget = evt.target;
   const cardItem = eventTarget.closest('.element');
-  
+
   cardItem.remove();
 }
  render();
+
+
+
+ 

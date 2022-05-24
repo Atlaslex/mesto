@@ -7,6 +7,7 @@
   <title>Место</title>
   <link rel="stylesheet" href="./pages/index.css">
   <script src="./scripts/index.js" defer></script>
+  <script src="./scripts/validate.js" defer></script>
 </head>
 
 <body class="body">
@@ -40,8 +41,8 @@
       <form class="form form_type_edit" name="edit-profile">
         <h2 class="form__title">Редактировать профиль</h2>
         <fieldset class="form__input">
-          <input class="form__item form__item_type_name" type="text" name="name" value="Жак-Ив Кусто">
-          <input class="form__item form__item_type_job" type="text" name="vocation" value="Исследователь океана">
+          <input class="form__item form__item_type_name" type="text" name="name" value="Жак-Ив Кусто" required minlength="2" maxlength="40">
+          <input class="form__item form__item_type_job" type="text" name="vocation" value="Исследователь океана" required>
           <button class="form__save" type="submit" name="save">Сохранить</button>
         </fieldset>
       </form>
