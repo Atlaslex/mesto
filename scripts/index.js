@@ -84,11 +84,24 @@ popupImageCloseButton.addEventListener('click', function () {
 
 function openPopup(evt) {
   evt.classList.add('popap_opened');
+  document.addEventListener('keydown', closePopupEsc);
   }
 
 function closePopup(evt) {
   evt.classList.remove('popap_opened');
+  document.removeEventListener('keydown', closePopupEsc);
 }
+
+function closePopupEsc(evt) {
+  if (evt.key === 'Escape') {
+    const popapOpened = document.querySelector('.popap_opened');
+    closePopup(popapOpened);
+  }
+}
+
+
+
+
 
 function handleFormEdit(evt) {
   evt.preventDefault();
@@ -159,4 +172,3 @@ function deleteCard (evt) {
 
 
 
- 
