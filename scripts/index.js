@@ -61,6 +61,7 @@ profileEditButton.addEventListener('click', function () {
   inputName.value = profileTitle.textContent;
   inputJob.value = profileSubtitle.textContent;
   openPopup(popupTypeEditProfile);
+
 });
 
 // Popup close edit form
@@ -85,7 +86,8 @@ popupImageCloseButton.addEventListener('click', function () {
 function openPopup(evt) {
   evt.classList.add('popap_opened');
   document.addEventListener('keydown', closePopupEsc);
-  }
+  
+}
 
 function closePopup(evt) {
   evt.classList.remove('popap_opened');

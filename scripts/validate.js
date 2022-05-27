@@ -37,11 +37,11 @@ const setEventListeners = (formElement) => {
   // сделаем из них массив методом Array.from
   const inputList = Array.from(formElement.querySelectorAll('.form__item'));
   const buttonElement = formElement.querySelector('.form__save');
-  // Обойдём все элементы полученной коллекции
-
+    // Обойдём все элементы полученной коллекции
+    toggleButtonState(inputList, buttonElement);
   inputList.forEach((formInput) => {
     // каждому полю добавим обработчик события input
-    formInput.addEventListener('input', () => {
+    formInput.addEventListener('input', function () {
       // Внутри колбэка вызовем isValid,
       // передав ей форму и проверяемый элемент
       isValid(formElement, formInput)
@@ -58,19 +58,20 @@ const enableValidation = () => {
 
   // Переберём полученную коллекцию
   formList.forEach((formElement) => {
-    formElement.addEventListener('submit', (evt) => {
+    formElement.addEventListener('submit', function (evt) {
       // У каждой формы отменим стандартное поведение
       evt.preventDefault();
     });
+    const fieldsetList = Array.from(formElement.querySelectorAll('.form__input'));
 
-    // Для каждой формы вызовем функцию setEventListeners,
-    // передав ей элемент формы
-    setEventListeners(formElement);
+fieldsetList.forEach((fieldSet) => {
+  setEventListeners(fieldSet);
+});
+
   });
 };
 
-// Вызовем функцию
-enableValidation();
+
 
 
 
@@ -98,3 +99,6 @@ const toggleButtonState = (inputList, buttonElement) => {
     buttonElement.classList.remove('form__save_inactive');
   }
 };
+
+// Вызовем функцию
+enableValidation();
