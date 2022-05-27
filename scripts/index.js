@@ -56,6 +56,8 @@ const popupImageCloseButton = popupImageItem.querySelector('.popup__close');
 
 const imagePopup = document.querySelector('.popup__image');
 const titlePopup = document.querySelector('.popup__title');
+
+const popups = Array.from(document.querySelectorAll('.popup'));
 // Open form edit profile
 profileEditButton.addEventListener('click', function () {
   inputName.value = profileTitle.textContent;
@@ -102,7 +104,17 @@ function closePopupEsc(evt) {
 }
 
 
-
+const closePopupByClickOnOverlay = () => {
+  popups.forEach((popup) => {
+      popup.addEventListener('mousedown', (evt) => {
+        if(evt.target == evt.currentTarget) {
+          closePopup(popup);
+        };
+      });
+    });
+  };
+  
+  closePopupByClickOnOverlay();
 
 
 function handleFormEdit(evt) {
