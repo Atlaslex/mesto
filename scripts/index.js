@@ -88,7 +88,7 @@ popupImageCloseButton.addEventListener('click', function () {
 function openPopup(evt) {
   evt.classList.add('popap_opened');
   document.addEventListener('keydown', closePopupEsc);
-  
+
 }
 
 function closePopup(evt) {
@@ -106,15 +106,15 @@ function closePopupEsc(evt) {
 
 const closePopupByClickOnOverlay = () => {
   popups.forEach((popup) => {
-      popup.addEventListener('mousedown', (evt) => {
-        if(evt.target == evt.currentTarget) {
-          closePopup(popup);
-        };
-      });
+    popup.addEventListener('mousedown', (evt) => {
+      if (evt.target == evt.currentTarget) {
+        closePopup(popup);
+      };
     });
-  };
-  
-  closePopupByClickOnOverlay();
+  });
+};
+
+closePopupByClickOnOverlay();
 
 
 function handleFormEdit(evt) {
@@ -128,7 +128,7 @@ function handleFormAdd(evt) {
   evt.preventDefault();
   const inputNewLocationName = newLocationName.value;
   const inputlinkImg = linkImg.value;
-  const card = getItem({name: inputNewLocationName, link: inputlinkImg});
+  const card = getItem({ name: inputNewLocationName, link: inputlinkImg });
   cardsContainerEl.prepend(card);
   newLocationName.value = '';
   linkImg.value = '';
@@ -143,46 +143,46 @@ function render() {
   const html = initialCards
     .map(getItem)
 
-    cardsContainerEl.append(...html);
+  cardsContainerEl.append(...html);
 }
 
 function getItem(item) {
-    const newItem = templateEl.content.cloneNode(true);
-    const headerEl = newItem.querySelector('.element__text');
-    const imgEl = newItem.querySelector('.element__element-img')
-    const likeButton = newItem.querySelector('.element__like');
-    const delitButton = newItem.querySelector('.element__delete-button');
+  const newItem = templateEl.content.cloneNode(true);
+  const headerEl = newItem.querySelector('.element__text');
+  const imgEl = newItem.querySelector('.element__element-img')
+  const likeButton = newItem.querySelector('.element__like');
+  const delitButton = newItem.querySelector('.element__delete-button');
 
-    headerEl.textContent = item.name;
-    imgEl.src = item.link;
-    imgEl.alt = headerEl.textContent;
+  headerEl.textContent = item.name;
+  imgEl.src = item.link;
+  imgEl.alt = headerEl.textContent;
 
-    likeButton.addEventListener('click', like);
-    delitButton.addEventListener('click', deleteCard);
+  likeButton.addEventListener('click', like);
+  delitButton.addEventListener('click', deleteCard);
 
-    imgEl.addEventListener('click', function() {
-      imagePopup.setAttribute('src', item.link);
-      imagePopup.setAttribute('alt', item.imageAlt);
-      titlePopup.textContent = item.name;
+  imgEl.addEventListener('click', function () {
+    imagePopup.setAttribute('src', item.link);
+    imagePopup.setAttribute('alt', item.imageAlt);
+    titlePopup.textContent = item.name;
 
-      openPopup(popupImageItem);
-    });
-    return newItem;
+    openPopup(popupImageItem);
+  });
+  return newItem;
 }
 
-function like (evt) {
+function like(evt) {
   const eventTarget = evt.target;
 
   eventTarget.classList.toggle('element__like_on');
 }
 
-function deleteCard (evt) {
+function deleteCard(evt) {
   const eventTarget = evt.target;
   const cardItem = eventTarget.closest('.element');
 
   cardItem.remove();
 }
- render();
+render();
 
 
 

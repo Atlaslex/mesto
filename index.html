@@ -43,12 +43,12 @@
         <fieldset class="form__input">
           <label class="label">
             <input id="name-input" class="form__item form__item_type_name" type="text" name="name" value="Жак-Ив Кусто"
-              required minlength="2" maxlength="40">
+              required minlength="2" maxlength="40" autocomplete="off">
             <span class="form__input-error name-input-error"></span>
           </label>
           <label class="label">
             <input id="job-input" class="form__item form__item_type_job" type="text" name="vocation"
-              value="Исследователь океана" required minlength="2" maxlength="200">
+              value="Исследователь океана" required minlength="2" maxlength="200" autocomplete="off">
             <span class="form__input-error job-input-error"></span>
           </label>
           <button class="form__save" type="submit" name="save">Сохранить</button>
@@ -65,12 +65,12 @@
         <fieldset class="form__input">
           <label class="label">
             <input id="location-name-input" class="form__item form__item_type_location-name" type="text"
-              name="place_name" placeholder="Название" required minlength="2" maxlength="30">
+              name="place_name" placeholder="Название" required minlength="2" maxlength="30" autocomplete="off">
             <span class="form__input-error location-name-input-error"></span>
           </label>
           <label class="label">
             <input id="location-name-link-img" class="form__item form__item_type_link-img" type="url" name="place_link"
-              placeholder="Сылка на картинку" required>
+              placeholder="Сылка на картинку" required autocomplete="off">
             <span class="form__input-error location-name-link-img-error"></span>
           </label>
           <button class="form__save" type="submit" name="save">Создать</button>

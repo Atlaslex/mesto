@@ -37,8 +37,8 @@ const setEventListeners = (formElement) => {
   // сделаем из них массив методом Array.from
   const inputList = Array.from(formElement.querySelectorAll('.form__item'));
   const buttonElement = formElement.querySelector('.form__save');
-    // Обойдём все элементы полученной коллекции
-    toggleButtonState(inputList, buttonElement);
+  // Обойдём все элементы полученной коллекции
+  toggleButtonState(inputList, buttonElement);
   inputList.forEach((formInput) => {
     // каждому полю добавим обработчик события input
     formInput.addEventListener('input', function () {
@@ -49,7 +49,6 @@ const setEventListeners = (formElement) => {
     });
   });
 };
-
 
 const enableValidation = () => {
   // Найдём все формы с указанным классом в DOM,
@@ -64,16 +63,12 @@ const enableValidation = () => {
     });
     const fieldsetList = Array.from(formElement.querySelectorAll('.form__input'));
 
-fieldsetList.forEach((fieldSet) => {
-  setEventListeners(fieldSet);
-});
+    fieldsetList.forEach((fieldSet) => {
+      setEventListeners(fieldSet);
+    });
 
   });
 };
-
-
-
-
 
 // Функция принимает массив полей
 
@@ -88,17 +83,19 @@ const hasInvalidInput = (inputList) => {
   })
 };
 
-
 const toggleButtonState = (inputList, buttonElement) => {
   // Если есть хотя бы один невалидный инпут
   if (hasInvalidInput(inputList)) {
     // сделай кнопку неактивной
     buttonElement.classList.add('form__save_inactive');
+    //Добавляем атрибут "disabled", чтобы нельзя было отправить неактивную форму через TAB по Enter.
+    buttonElement.setAttribute('disabled', true);
   } else {
     // иначе сделай кнопку активной
     buttonElement.classList.remove('form__save_inactive');
+    buttonElement.removeAttribute('disabled', true);
   }
 };
 
 // Вызовем функцию
-enableValidation();
+enableValidation(); 
