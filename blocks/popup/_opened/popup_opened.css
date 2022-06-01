@@ -1,8 +1,7 @@
-.popap_opened {
+.popup_opened {
   visibility: visible;
   opacity: 1;
   transition: visibility .3s, opacity .3s;
   }
 
-    
- 
+
