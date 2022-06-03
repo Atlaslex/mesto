@@ -65,6 +65,11 @@ function openPopup(popup) {
   document.addEventListener('keydown', closePopupEsc);
 };
 
+const disablePopupSaveButton = (popupSaveButton) => {
+  popupSaveButton.classList.add('form__save_inactive');
+  popupSaveButton.setAttribute('disabled', true);
+};
+
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', closePopupEsc);

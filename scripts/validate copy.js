@@ -1,7 +1,4 @@
-const disablePopupSaveButton = (popupSaveButton) => {
-  popupSaveButton.classList.add('form__save_inactive');
-  popupSaveButton.setAttribute('disabled', true);
-};
+
 // Функция, которая добавляет класс с ошибкой
 const showInputError = (formElement, formInput, errorMessage, objectKeyList) => {
   const errorElement = formElement.querySelector(`.${formInput.id}-error`);
@@ -83,9 +80,10 @@ const hasInvalidInput = (inputList) => {
 const toggleButtonState = (inputList, buttonElement, objectKeyList) => {
   // Если есть хотя бы один невалидный инпут
   if (hasInvalidInput(inputList)) {
-    disablePopupSaveButton(cardPopupSaveButton);
     // сделай кнопку неактивной
+    buttonElement.classList.add(objectKeyList.inactiveButtonClass);
     //Добавляем атрибут "disabled", чтобы нельзя было отправить неактивную форму через TAB по Enter.
+    buttonElement.setAttribute('disabled', true);
   } else {
     // иначе сделай кнопку активной
     buttonElement.classList.remove(objectKeyList.inactiveButtonClass);
