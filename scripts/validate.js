@@ -34,8 +34,8 @@ const setEventListeners = (fieldSet, objectKeyList) => {
   // сделаем из них массив методом Array.from
   const inputList = Array.from(fieldSet.querySelectorAll(objectKeyList.inputSelector));
   const buttonElement = fieldSet.querySelector(objectKeyList.submitButtonSelector);
+  toggleButtonState(inputList, buttonElement, objectKeyList);
   // Обойдём все элементы полученной коллекции
-
   inputList.forEach((formInput) => {
     // каждому полю добавим обработчик события input
     formInput.addEventListener('input', function () {

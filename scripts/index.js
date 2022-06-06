@@ -106,7 +106,7 @@ function handleFormAdd(evt) {
   cardsContainerElements.prepend(card);
   newLocationName.value = '';
   linkImage.value = '';
-
+  disablePopupSaveButton(cardPopupSaveButton);
   closePopup(popupTypeAddCard);
 }
 
@@ -131,9 +131,7 @@ function getItem(item) {
   imageElement.src = item.link;
   imageElement.alt = headerElement.textContent;
 
-  disablePopupSaveButton(cardPopupSaveButton);
-
-  likeButton.addEventListener('click', like);
+    likeButton.addEventListener('click', like);
   deleteButton.addEventListener('click', deleteCard);
 
   imageElement.addEventListener('click', function () {
