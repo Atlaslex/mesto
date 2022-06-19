@@ -1,3 +1,6 @@
+import {initialCards} from "./cards.js";
+import Card from './Card.js';
+
 const placeInput = document.querySelector('[name="place_name"]');
 const linkInput = document.querySelector('[name="place_link"]');
 
@@ -22,15 +25,26 @@ const popupAddCloseButton = popupTypeAddCard.querySelector('.popup__close');
 const newLocationName = popupTypeAddCard.querySelector('.form__item_type_location-name');
 const linkImage = popupTypeAddCard.querySelector('.form__item_type_link-img');
 
-const popupImageItem = document.querySelector('.popup_type_img');
+export const popupImageItem = document.querySelector('.popup_type_img');
 const popupImageCloseButton = popupImageItem.querySelector('.popup__close');
 const cardPopupSaveButton = popupTypeAddCard.querySelector('.form__save');
 
-const imagePopup = document.querySelector('.popup__image');
-const titlePopup = document.querySelector('.popup__title');
+export const imagePopup = document.querySelector('.popup__image');
+export const titlePopup = document.querySelector('.popup__title');
 
 const popups = Array.from(document.querySelectorAll('.popup'));
 
+const createCard = (item) => {
+  const card = new Card(item, '.template');
+  return card;
+};
+
+initialCards.forEach((item) => {
+  const card = createCard(item);
+  const cardElement = card.generateCard();
+
+  cardsContainerElements.append(cardElement);
+});
 
 // Открытие формы редактирования профиля
 profileEditButton.addEventListener('click', function () {
@@ -59,7 +73,7 @@ popupImageCloseButton.addEventListener('click', function () {
   closePopup(popupImageItem);
 });
 // Функция открытия всплывающих окон
-function openPopup(popup) {
+export function openPopup(popup) {
   popup.classList.add('popup_opened');
   // Добавляем слушателя ожидания нажатия на "Escape"
   document.addEventListener('keydown', closePopupEsc);
@@ -113,51 +127,48 @@ function handleFormAdd(evt) {
 formElementTypeEdit.addEventListener('submit', handleFormEdit);
 formElementTypeAdd.addEventListener('submit', handleFormAdd);
 
-function render() {
-  const html = initialCards
-    .map(getItem)
+// function render() {
+//   const html = initialCards
+//     .map(getItem)
 
-  cardsContainerElements.append(...html);
-}
+//   cardsContainerElements.append(...html);
+// }
 
-function getItem(item) {
-  const newItem = templateElement.content.cloneNode(true);
-  const headerElement = newItem.querySelector('.element__text');
-  const imageElement = newItem.querySelector('.element__element-img')
-  const likeButton = newItem.querySelector('.element__like');
-  const deleteButton = newItem.querySelector('.element__delete-button');
+// function getItem(item) {
+//   const newItem = templateElement.content.cloneNode(true);
+//   const headerElement = newItem.querySelector('.element__text');
+//   const imageElement = newItem.querySelector('.element__element-img')
+//   const likeButton = newItem.querySelector('.element__like');
+//   const deleteButton = newItem.querySelector('.element__delete-button');
 
-  headerElement.textContent = item.name;
-  imageElement.src = item.link;
-  imageElement.alt = headerElement.textContent;
+//   headerElement.textContent = item.name;
+//   imageElement.src = item.link;
+//   imageElement.alt = headerElement.textContent;
 
-    likeButton.addEventListener('click', like);
-  deleteButton.addEventListener('click', deleteCard);
+//     likeButton.addEventListener('click', like);
+//   deleteButton.addEventListener('click', deleteCard);
 
-  imageElement.addEventListener('click', function () {
-    imagePopup.setAttribute('src', item.link);
-    imagePopup.setAttribute('alt', item.imageAlt);
-    titlePopup.textContent = item.name;
+//   imageElement.addEventListener('click', function () {
+//     imagePopup.setAttribute('src', item.link);
+//     imagePopup.setAttribute('alt', item.imageAlt);
+//     titlePopup.textContent = item.name;
 
-    openPopup(popupImageItem);
+//     openPopup(popupImageItem);
 
-  });
-  return newItem;
-}
+//   });
+//   return newItem;
+// }
 
-function like(evt) {
-  const eventTarget = evt.target;
+// function like(evt) {
+//   const eventTarget = evt.target;
 
-  eventTarget.classList.toggle('element__like_on');
-}
+//   eventTarget.classList.toggle('element__like_on');
+// }
 
-function deleteCard(evt) {
-  const eventTarget = evt.target;
-  const cardItem = eventTarget.closest('.element');
+// function deleteCard(evt) {
+//   const eventTarget = evt.target;
+//   const cardItem = eventTarget.closest('.element');
 
-  cardItem.remove();
-}
-render();
-
-
-
+//   cardItem.remove();
+// }
+// render();
