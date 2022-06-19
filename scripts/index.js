@@ -112,17 +112,30 @@ function handleFormEdit(evt) {
   closePopup(popupTypeEditProfile);
 }
 
-function handleFormAdd(evt) {
+const handleFormAdd = (evt) => {
   evt.preventDefault();
-  const inputNewLocationName = newLocationName.value;
-  const inputlinkImg = linkImage.value;
-  const card = getItem({ name: inputNewLocationName, link: inputlinkImg });
-  cardsContainerElements.prepend(card);
-  newLocationName.value = '';
-  linkImage.value = '';
-  disablePopupSaveButton(cardPopupSaveButton);
+  const newCard = {
+    link: linkImage.value,
+    name: newLocationName.value,
+  };
   closePopup(popupTypeAddCard);
-}
+  const card = createCard(newCard);
+  const cardElement = card.generateCard();
+
+  cardsContainerElements.prepend(cardElement); //добавить карточку в начало
+};
+
+// function handleFormAdd(evt) {
+//   evt.preventDefault();
+//   const inputNewLocationName = newLocationName.value;
+//   const inputlinkImg = linkImage.value;
+//   const card = getItem({ name: inputNewLocationName, link: inputlinkImg });
+//   cardsContainerElements.prepend(card);
+//   newLocationName.value = '';
+//   linkImage.value = '';
+//   disablePopupSaveButton(cardPopupSaveButton);
+//   closePopup(popupTypeAddCard);
+// }
 
 formElementTypeEdit.addEventListener('submit', handleFormEdit);
 formElementTypeAdd.addEventListener('submit', handleFormAdd);
