@@ -1,5 +1,33 @@
-import {initialCards} from "./cards.js";
 import Card from './Card.js';
+import FormValidator from './FormValidator.js';
+import { validationConfig } from "./FormValidator.js";
+
+const initialCards = [
+  {
+    name: 'Кален Эмсли',
+    link: './blocks/element/__element-img/kalen-emsley.jpg'
+  },
+  {
+    name: 'Осло. Норвегия',
+    link: './blocks/element/__element-img/oslo.jpg'
+  },
+  {
+    name: 'Мадейра',
+    link: './blocks/element/__element-img/madeyra.jpg'
+  },
+  {
+    name: 'Италия',
+    link: './blocks/element/__element-img/italia.jpg'
+  },
+  {
+    name: 'Уитчемптон, Уимборн, Великобритания',
+    link: './blocks/element/__element-img/brit.jpg'
+  },
+  {
+    name: 'Исландия',
+    link: './blocks/element/__element-img/iceland.jpg'
+  }
+];
 
 const placeInput = document.querySelector('[name="place_name"]');
 const linkInput = document.querySelector('[name="place_link"]');
@@ -7,7 +35,7 @@ const linkInput = document.querySelector('[name="place_link"]');
 const templateElement = document.querySelector('.template');
 const cardsContainerElements = document.querySelector('.elements');
 
-// Popup edit form
+
 const formElementTypeEdit = document.querySelector('.form_type_edit');
 const profileTitle = document.querySelector('.profile__title');
 const profileSubtitle = document.querySelector('.profile__subtitle');
@@ -16,6 +44,7 @@ const profileEditButton = document.querySelector('.profile__edit-button');
 const popupTypeEditProfile = document.querySelector('.popup_type_edit-profile');
 const inputName = document.querySelector('.form__item_type_name')
 const inputJob = document.querySelector('.form__item_type_job')
+const profilePopupForm = popupTypeEditProfile.querySelector('.form');
 
 // Popup add form
 const formElementTypeAdd = document.querySelector('.form_type_add');
@@ -34,6 +63,9 @@ export const titlePopup = document.querySelector('.popup__title');
 
 const popups = Array.from(document.querySelectorAll('.popup'));
 
+const profilePopupFormValidator = new FormValidator(validationConfig, profilePopupForm);
+const cardPopupFormValidator = new FormValidator(validationConfig, formElementTypeAdd);
+
 const createCard = (item) => {
   const card = new Card(item, '.template');
   return card;
@@ -48,6 +80,7 @@ initialCards.forEach((item) => {
 
 // Открытие формы редактирования профиля
 profileEditButton.addEventListener('click', function () {
+  profilePopupFormValidator.clearForm();
   inputName.value = profileTitle.textContent;
   inputJob.value = profileSubtitle.textContent;
   openPopup(popupTypeEditProfile);
@@ -60,6 +93,7 @@ popupEditCloseButton.addEventListener('click', function () {
 
 // Открытие формы добавления новой карточки
 profileAddButton.addEventListener('click', function () {
+  cardPopupFormValidator.clearForm();
   openPopup(popupTypeAddCard);
 })
 
@@ -111,7 +145,7 @@ function handleFormEdit(evt) {
   profileSubtitle.textContent = inputJob.value;
   closePopup(popupTypeEditProfile);
 }
-
+// Заполнение карточки введёнными данными, закрытие при нажатии на сабмит.
 const handleFormAdd = (evt) => {
   evt.preventDefault();
   const newCard = {
@@ -139,6 +173,9 @@ const handleFormAdd = (evt) => {
 
 formElementTypeEdit.addEventListener('submit', handleFormEdit);
 formElementTypeAdd.addEventListener('submit', handleFormAdd);
+
+cardPopupFormValidator.enableValidation();
+profilePopupFormValidator.enableValidation();
 
 // function render() {
 //   const html = initialCards
