@@ -5,14 +5,12 @@ import {
   openPopup,
 } from './index.js';
 
-
 export default class Card {
   constructor(data, cardSelector) {
     this._link = data.link;
     this._name = data.name;
     this._cardSelector = cardSelector;
   };
-
 
   _getTemplate() {
     const cardElement = document
