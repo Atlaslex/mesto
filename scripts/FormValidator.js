@@ -4,7 +4,6 @@ export default class FormValidator {
     this._formElement = form;
     this._inputList = Array.from(this._formElement.querySelectorAll(this._settings.inputSelector));
     this._buttonElement = this._formElement.querySelector(this._settings.submitButtonSelector);
-    this._popupSaveBtns = this._formElement.querySelectorAll('.form__save');
   };
 
   //Функция, добавляющая класс с ошибкой.
@@ -84,18 +83,10 @@ export default class FormValidator {
   clearForm = () => {
 
     // Блокировка сабмита при открытии.
-    this._popupSaveBtns.forEach((popupSaveBtn) => {
-      this._inactiveButtonSave();
-    });
-    
+    this._inactiveButtonSave();
+    // Очищаем инпуты от ошибок.
     this._inputList.forEach((inputElement) => {
       this._hideInputError(inputElement);
-    });
-
-    // Удаляем красное подчеркивание ошибок инпутов.
-    const popupInputsErrorsRedBorder = Array.from(this._formElement.querySelectorAll('.form__item'));
-    popupInputsErrorsRedBorder.forEach((popupInputErrorRedBorder) => {
-      popupInputErrorRedBorder.classList.remove('form__input_type_error');
     });
   };
 

@@ -84,7 +84,7 @@ profileEditButton.addEventListener('click', function () {
 profileAddButton.addEventListener('click', function () {
   formElementTypeAdd.reset();
   cardPopupFormValidator.clearForm();
- 
+
   openPopup(popupTypeAddCard);
 })
 
