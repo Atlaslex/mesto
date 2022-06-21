@@ -87,11 +87,9 @@ export default class FormValidator {
     this._popupSaveBtns.forEach((popupSaveBtn) => {
       this._inactiveButtonSave();
     });
-
-    // Удаляем ошибки инпутов.
-    const popupInputsErrors = Array.from(this._formElement.querySelectorAll('.form__input-error'));
-    popupInputsErrors.forEach((popupInputError) => {
-      popupInputError.textContent = '';
+    
+    this._inputList.forEach((inputElement) => {
+      this._hideInputError(inputElement);
     });
 
     // Удаляем красное подчеркивание ошибок инпутов.
