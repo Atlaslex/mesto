@@ -67,14 +67,12 @@ const cardPopupFormValidator = new FormValidator(validationConfig, formElementTy
 
 const createCard = (item) => {
   const card = new Card(item, '.template');
-  return card;
+  const cardElement = card.generateCard();
+  return cardElement;
 };
 
 initialCards.forEach((item) => {
-  const card = createCard(item);
-  const cardElement = card.generateCard();
-
-  cardsContainerElements.append(cardElement);
+  cardsContainerElements.append((createCard(item)));
 });
 
 // Открытие формы редактирования профиля
@@ -85,11 +83,6 @@ profileEditButton.addEventListener('click', function () {
   openPopup(popupTypeEditProfile);
 });
 
-// Закрытие формы редактирования профиля
-// popupEditCloseButton.addEventListener('click', function () {
-//   closePopup(popupTypeEditProfile);
-// });
-
 // Открытие формы добавления новой карточки
 profileAddButton.addEventListener('click', function () {
   formElementTypeAdd.reset();
@@ -98,19 +91,10 @@ profileAddButton.addEventListener('click', function () {
   openPopup(popupTypeAddCard);
 })
 
-// Закрытие формы добавления новой карточки
-// popupAddCloseButton.addEventListener('click', function () {
-//   closePopup(popupTypeAddCard);
-// });
-
-// Закрытие всплывающей картинки
-// popupImageCloseButton.addEventListener('click', function () {
-//   closePopup(popupImageItem);
-// });
-
 // Функция открытия всплывающих окон
 export function openPopup(popup) {
   popup.classList.add('popup_opened');
+
   // Добавляем слушателя ожидания нажатия на "Escape"
   document.addEventListener('keydown', closePopupEsc);
 };
@@ -155,8 +139,7 @@ const handleFormAdd = (evt) => {
   };
 
   closePopup(popupTypeAddCard);
-  const card = createCard(newCard);
-  const cardElement = card.generateCard();
+  const cardElement = createCard(newCard);
 
   cardsContainerElements.prepend(cardElement); //добавить карточку в начало
 };

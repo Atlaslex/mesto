@@ -93,7 +93,7 @@ export default class FormValidator {
     popupInputsErrors.forEach((popupInputError) => {
       popupInputError.textContent = '';
     });
-    
+
     // Удаляем красное подчеркивание ошибок инпутов.
     const popupInputsErrorsRedBorder = Array.from(this._formElement.querySelectorAll('.form__item'));
     popupInputsErrorsRedBorder.forEach((popupInputErrorRedBorder) => {
