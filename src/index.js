@@ -1,33 +1,41 @@
-import Card from './Card.js';
-import FormValidator from './FormValidator.js';
-import Section from './Section.js';
-import PopupWithForm from './PopupWithForm.js';
-import UserInfo from './UserInfo.js';
+import './pages/index.css';
+import Card from './scripts/Card.js';
+import FormValidator from './scripts/FormValidator.js';
+import Section from './scripts/Section.js';
+import PopupWithForm from './scripts/PopupWithForm.js';
+import UserInfo from './scripts/UserInfo.js';
+
+const Kalen = new URL('./blocks/element/__element-img/kalen-emsley.jpg', import.meta.url);
+const Oslo = new URL('./blocks/element/__element-img/oslo.jpg', import.meta.url);
+const Madeyra = new URL('./blocks/element/__element-img/madeyra.jpg', import.meta.url);
+const Italy = new URL('./blocks/element/__element-img/italia.jpg', import.meta.url);
+const Brit = new URL('./blocks/element/__element-img/brit.jpg', import.meta.url);
+const Iceland = new URL('./blocks/element/__element-img/iceland.jpg', import.meta.url);
 
 const initialCards = [
   {
     name: 'Кален Эмсли',
-    link: './blocks/element/__element-img/kalen-emsley.jpg'
+    link: Kalen
   },
   {
     name: 'Осло. Норвегия',
-    link: './blocks/element/__element-img/oslo.jpg'
+    link: Oslo
   },
   {
     name: 'Мадейра',
-    link: './blocks/element/__element-img/madeyra.jpg'
+    link: Madeyra
   },
   {
     name: 'Италия',
-    link: './blocks/element/__element-img/italia.jpg'
+    link: Italy
   },
   {
     name: 'Уитчемптон, Уимборн, Великобритания',
-    link: './blocks/element/__element-img/brit.jpg'
+    link: Brit
   },
   {
     name: 'Исландия',
-    link: './blocks/element/__element-img/iceland.jpg'
+    link: Iceland
   }
 ];
 
