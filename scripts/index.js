@@ -1,5 +1,8 @@
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
+import Section from './Section.js';
+import PopupWithForm from './PopupWithForm.js';
+import UserInfo from './UserInfo.js';
 
 const initialCards = [
   {
@@ -63,51 +66,48 @@ const profilePopupFormValidator = new FormValidator(validationConfig, profilePop
 const cardPopupFormValidator = new FormValidator(validationConfig, formElementTypeAdd);
 
 const createCard = (item) => {
-  const card = new Card(item, '.template');
-  const cardElement = card.generateCard();
+  const card = new Card(item, '.template', handleCardClick);
+  const cardElement = card.getItemElement();
   return cardElement;
 };
 
-initialCards.forEach((item) => {
-  cardsContainerElements.append((createCard(item)));
-});
-
-// Открытие формы редактирования профиля
-profileEditButton.addEventListener('click', function () {
-  profilePopupFormValidator.clearForm();
-  inputName.value = profileTitle.textContent;
-  inputJob.value = profileSubtitle.textContent;
-  openPopup(popupTypeEditProfile);
-});
-
-// Открытие формы добавления новой карточки
-profileAddButton.addEventListener('click', function () {
-  formElementTypeAdd.reset();
-  cardPopupFormValidator.clearForm();
-
-  openPopup(popupTypeAddCard);
-})
-
-// Функция открытия всплывающих окон
-export function openPopup(popup) {
-  popup.classList.add('popup_opened');
-
-  // Добавляем слушателя ожидания нажатия на "Escape"
-  document.addEventListener('keydown', closePopupEsc);
+function handleCardClick(name, link) {
+  imagePopup.src = link;
+  imagePopup.alt = `Фото ${name}`;
+  titlePopup.textContent = name;
+  openPopup(popupImageItem);
 };
 
-function closePopup(popup) {
-  popup.classList.remove('popup_opened');
-  document.removeEventListener('keydown', closePopupEsc);
-}
+const cardsContainer = new Section({
+  items: initialCards,
+  renderer: createCard,
+}, cardsContainerElements);
 
-function closePopupEsc(evt) {
+cardsContainer.renderItems();
+
+const pressButtonEsc = evt => {
   if (evt.key === 'Escape') {
-    const popupOpened = document.querySelector('.popup_opened');
-    closePopup(popupOpened);
+    const popupOpen = document.querySelector('.popup_opened')
+    closePopup(popupOpen)
   }
 }
 
+export const openPopup = popupObject => {
+  popupObject.classList.add('popup_opened');
+  document.addEventListener('keydown', pressButtonEsc);
+}
+
+const closePopup = popupObject => {
+  popupObject.classList.remove('popup_opened');
+  document.removeEventListener('keydown', pressButtonEsc);
+}
+
+const profileInfo = new UserInfo(
+  ".profile__title",
+  ".profile__subtitle"
+);
+
+// Функция закрытия всплывающих окон по клику на overlay или кнопку закрытия.
 const closePopupByClickOnOverlay = () => {
   popups.forEach((popup) => {
     popup.addEventListener('mousedown', (evt) => {
@@ -120,29 +120,52 @@ const closePopupByClickOnOverlay = () => {
 
 closePopupByClickOnOverlay();
 
-function handleFormEdit(evt) {
+const renderItemPrepend = (wrap, card) => {
+  wrap.prepend(card);
+}
+
+const popupAddCard = new PopupWithForm(
+  ".popup_type_add-card",
+  ({ placeinput, linkinput }) => {
+    cardList.prependItem({ name: placeinput, link: linkinput });
+  }
+);
+popupAddCard.setEventListeners();
+
+const popupEditCard = new PopupWithForm(
+  ".popup_type_edit-profile",
+  ({ placeinput, linkinput }) => {
+    cardList.prependItem({ name: placeinput, link: linkinput });
+  }
+);
+popupEditCard.setEventListeners();
+
+// Открытие формы добавления новой карточки.
+profileAddButton.addEventListener('click', function () {
+  formElementTypeAdd.reset();
+  cardPopupFormValidator.clearForm();
+  popupAddCard.open();
+})
+
+formElementTypeAdd.addEventListener('submit', evt => {
+  evt.preventDefault();
+  renderItemPrepend(cardsContainerElements, createCard({ name: newLocationName.value, link: linkImage.value }));
+  popupAddCard.close();
+});
+
+profileEditButton.addEventListener('click', evt => {
+  inputName.value = profileTitle.textContent;
+  inputJob.value = profileSubtitle.textContent;
+  profilePopupFormValidator.clearForm();
+  popupEditCard.open();
+});
+
+formElementTypeEdit.addEventListener('submit', evt => {
   evt.preventDefault();
   profileTitle.textContent = inputName.value;
   profileSubtitle.textContent = inputJob.value;
-  closePopup(popupTypeEditProfile);
-}
-
-// Заполнение карточки введёнными данными, закрытие при нажатии на сабмит.
-const handleFormAdd = (evt) => {
-  evt.preventDefault();
-  const newCard = {
-    link: linkImage.value,
-    name: newLocationName.value,
-  };
-
-  closePopup(popupTypeAddCard);
-  const cardElement = createCard(newCard);
-
-  cardsContainerElements.prepend(cardElement); //добавить карточку в начало
-};
-
-formElementTypeEdit.addEventListener('submit', handleFormEdit);
-formElementTypeAdd.addEventListener('submit', handleFormAdd);
+  popupEditCard.close();
+});
 
 cardPopupFormValidator.enableValidation();
 profilePopupFormValidator.enableValidation();
