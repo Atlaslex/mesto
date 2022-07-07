@@ -1,9 +1,10 @@
 import './pages/index.css';
-import Card from './scripts/Card.js';
-import FormValidator from './scripts/FormValidator.js';
-import Section from './scripts/Section.js';
-import PopupWithForm from './scripts/PopupWithForm.js';
-import UserInfo from './scripts/UserInfo.js';
+import Card from './components/Card.js';
+import FormValidator from './components/FormValidator.js';
+import Section from './components/Section.js';
+import PopupWithForm from './components/PopupWithForm.js';
+import UserInfo from './components/UserInfo.js';
+import PopupWithImage from './components/PopupWithImage';
 
 const Kalen = new URL('./blocks/element/__element-img/kalen-emsley.jpg', import.meta.url);
 const Oslo = new URL('./blocks/element/__element-img/oslo.jpg', import.meta.url);
@@ -61,14 +62,8 @@ const profilePopupForm = popupTypeEditProfile.querySelector('.form');
 // Popup add form
 const formElementTypeAdd = document.querySelector('.form_type_add');
 const profileAddButton = document.querySelector('.profile__add-button');
-const popupTypeAddCard = document.querySelector('.popup_type_add-card');
-const newLocationName = popupTypeAddCard.querySelector('.form__item_type_location-name');
-const linkImage = popupTypeAddCard.querySelector('.form__item_type_link-img');
-
-export const popupImageItem = document.querySelector('.popup_type_img');
-export const imagePopup = document.querySelector('.popup__image');
-export const titlePopup = document.querySelector('.popup__title');
-const popups = Array.from(document.querySelectorAll('.popup'));
+const newLocationName = document.querySelector('.form__item_type_location-name');
+const linkImage = document.querySelector('.form__item_type_link-img');
 
 const profilePopupFormValidator = new FormValidator(validationConfig, profilePopupForm);
 const cardPopupFormValidator = new FormValidator(validationConfig, formElementTypeAdd);
@@ -79,11 +74,12 @@ const createCard = (item) => {
   return cardElement;
 };
 
+const popupOpenCard = new PopupWithImage ('.popup_type_img');
+
+popupOpenCard.setEventListeners();
+
 function handleCardClick(name, link) {
-  imagePopup.src = link;
-  imagePopup.alt = `Фото ${name}`;
-  titlePopup.textContent = name;
-  openPopup(popupImageItem);
+popupOpenCard.open(name, link);
 };
 
 const cardsContainer = new Section({
@@ -93,40 +89,10 @@ const cardsContainer = new Section({
 
 cardsContainer.renderItems();
 
-const pressButtonEsc = evt => {
-  if (evt.key === 'Escape') {
-    const popupOpen = document.querySelector('.popup_opened')
-    closePopup(popupOpen)
-  }
-}
-
-export const openPopup = popupObject => {
-  popupObject.classList.add('popup_opened');
-  document.addEventListener('keydown', pressButtonEsc);
-}
-
-const closePopup = popupObject => {
-  popupObject.classList.remove('popup_opened');
-  document.removeEventListener('keydown', pressButtonEsc);
-}
-
 const profileInfo = new UserInfo(
   ".profile__title",
   ".profile__subtitle"
 );
-
-// Функция закрытия всплывающих окон по клику на overlay или кнопку закрытия.
-const closePopupByClickOnOverlay = () => {
-  popups.forEach((popup) => {
-    popup.addEventListener('mousedown', (evt) => {
-      if (evt.target == evt.currentTarget || evt.target.classList.contains('popup__close')) {
-        closePopup(popup);
-      };
-    });
-  });
-};
-
-closePopupByClickOnOverlay();
 
 const renderItemPrepend = (wrap, card) => {
   wrap.prepend(card);
@@ -135,7 +101,8 @@ const renderItemPrepend = (wrap, card) => {
 const popupAddCard = new PopupWithForm(
   ".popup_type_add-card",
   ({ placeinput, linkinput }) => {
-    cardList.prependItem({ name: placeinput, link: linkinput });
+    cardsContainer.prependItem({ name: placeinput, link: linkinput });
+
   }
 );
 popupAddCard.setEventListeners();
