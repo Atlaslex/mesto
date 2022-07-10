@@ -1,20 +1,23 @@
+// Информация о пользователе
 export default class UserInfo {
-  constructor(profileTitle, profileSubtitle) {
-    this._profileTitle = document.querySelector(profileTitle);
-    this._profileSubtitle = document.querySelector(profileSubtitle);
+  constructor({ nameSelector, jobSelector }) {
+    this._nameSelector = nameSelector;
+    this._jobSelector = jobSelector;
+    this._nameElement = document.querySelector(`.${this._nameSelector}`);
+    this._jobElement = document.querySelector(`.${this._jobSelector}`);
   }
 
+  // Создаём пустой объект и наполняем его данными о пользователе.
   getUserInfo() {
-    const profileInfo = {};
-
-    profileInfo[''] = this._profileTitle.textContent;
-    profileInfo[''] = this._profileSubtitle.textContent;
-
-    return profileInfo;
+    this._userData = {};
+    this._userData.name = this._nameElement.textContent;
+    this._userData.job = this._jobElement.textContent;
+    return this._userData;
   }
 
-  setUserInfo = (nameInput, descriptionInput) => {
-    this._profileTitle.textContent = nameInput;
-    this._profileSubtitle.textContent = descriptionInput;
-  };
+  setUserInfo(formData) {
+    this._nameElement.textContent = formData.name;
+    this._jobElement.textContent = formData.vocation;
+  }
+
 }

@@ -49,24 +49,22 @@ const validationConfig = {
   errorClass: 'form__input-error'
 };
 
-const cardsContainerElements = document.querySelector('.elements');
-const formElementTypeEdit = document.querySelector('.form_type_edit');
-const profileTitle = document.querySelector('.profile__title');
-const profileSubtitle = document.querySelector('.profile__subtitle');
+const cardsContainerElements = 'elements';
 const profileEditButton = document.querySelector('.profile__edit-button');
 const popupTypeEditProfile = document.querySelector('.popup_type_edit-profile');
-const inputName = document.querySelector('.form__item_type_name')
-const inputJob = document.querySelector('.form__item_type_job')
 const profilePopupForm = popupTypeEditProfile.querySelector('.form');
 
 // Popup add form
 const formElementTypeAdd = document.querySelector('.form_type_add');
 const profileAddButton = document.querySelector('.profile__add-button');
-const newLocationName = document.querySelector('.form__item_type_location-name');
-const linkImage = document.querySelector('.form__item_type_link-img');
 
 const profilePopupFormValidator = new FormValidator(validationConfig, profilePopupForm);
 const cardPopupFormValidator = new FormValidator(validationConfig, formElementTypeAdd);
+
+const profileConfiguration = {
+  nameSelector: 'profile__title',
+  jobSelector: 'profile__subtitle',
+}
 
 const createCard = (item) => {
   const card = new Card(item, '.template', handleCardClick);
@@ -74,12 +72,12 @@ const createCard = (item) => {
   return cardElement;
 };
 
-const popupOpenCard = new PopupWithImage ('.popup_type_img');
-
-popupOpenCard.setEventListeners();
+// Открытие картинки из карточки на полный экран.
+const popupOpenImage = new PopupWithImage('.popup_type_img');
+popupOpenImage.setEventListeners();
 
 function handleCardClick(name, link) {
-popupOpenCard.open(name, link);
+  popupOpenImage.open(name, link);
 };
 
 const cardsContainer = new Section({
@@ -89,31 +87,26 @@ const cardsContainer = new Section({
 
 cardsContainer.renderItems();
 
-const profileInfo = new UserInfo(
-  ".profile__title",
-  ".profile__subtitle"
-);
+const profileInfo = new UserInfo(profileConfiguration);
 
-const renderItemPrepend = (wrap, card) => {
-  wrap.prepend(card);
-}
+const handleCardSubmit = (item) => {
+  cardsContainer.addItem(item);
+};
 
 const popupAddCard = new PopupWithForm(
-  ".popup_type_add-card",
-  ({ placeinput, linkinput }) => {
-    cardsContainer.prependItem({ name: placeinput, link: linkinput });
-
-  }
+  '.popup_type_add-card',
+  handleCardSubmit
 );
 popupAddCard.setEventListeners();
 
-const popupEditCard = new PopupWithForm(
+const popupEditProfile = new PopupWithForm(
   ".popup_type_edit-profile",
-  ({ placeinput, linkinput }) => {
-    cardList.prependItem({ name: placeinput, link: linkinput });
+  (formData) => {
+    profileInfo.setUserInfo(formData);
+    popupEditProfile.close();
   }
 );
-popupEditCard.setEventListeners();
+popupEditProfile.setEventListeners();
 
 // Открытие формы добавления новой карточки.
 profileAddButton.addEventListener('click', function () {
@@ -122,24 +115,9 @@ profileAddButton.addEventListener('click', function () {
   popupAddCard.open();
 })
 
-formElementTypeAdd.addEventListener('submit', evt => {
-  evt.preventDefault();
-  renderItemPrepend(cardsContainerElements, createCard({ name: newLocationName.value, link: linkImage.value }));
-  popupAddCard.close();
-});
-
 profileEditButton.addEventListener('click', evt => {
-  inputName.value = profileTitle.textContent;
-  inputJob.value = profileSubtitle.textContent;
   profilePopupFormValidator.clearForm();
-  popupEditCard.open();
-});
-
-formElementTypeEdit.addEventListener('submit', evt => {
-  evt.preventDefault();
-  profileTitle.textContent = inputName.value;
-  profileSubtitle.textContent = inputJob.value;
-  popupEditCard.close();
+  popupEditProfile.open();
 });
 
 cardPopupFormValidator.enableValidation();
