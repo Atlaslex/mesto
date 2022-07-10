@@ -95,16 +95,21 @@ const handleCardSubmit = (item) => {
 
 const popupAddCard = new PopupWithForm(
   '.popup_type_add-card',
+  cardPopupFormValidator.clearForm,
   handleCardSubmit
 );
 popupAddCard.setEventListeners();
 
+function handleProfileFormSubmit (formData) {
+  profileInfo.setUserInfo(formData);
+  // popupEditProfile.close();
+};
+
 const popupEditProfile = new PopupWithForm(
   ".popup_type_edit-profile",
-  (formData) => {
-    profileInfo.setUserInfo(formData);
-    popupEditProfile.close();
-  }
+  profilePopupFormValidator.clearForm,
+  handleProfileFormSubmit,
+  profileInfo.getUserInfo,
 );
 popupEditProfile.setEventListeners();
 
@@ -115,8 +120,16 @@ profileAddButton.addEventListener('click', function () {
   popupAddCard.open();
 })
 
+// formElementTypeAdd.addEventListener('submit', evt => {
+//   evt.preventDefault();
+//   renderItemPrepend(cardsContainerElements, createCard({ name: newLocationName.value, link: linkImage.value }));
+//   popupAddCard.close();
+// });
+
 profileEditButton.addEventListener('click', evt => {
-  profilePopupFormValidator.clearForm();
+  // inputName.value = profileTitle.textContent;
+  // inputJob.value = profileSubtitle.textContent;
+  // profilePopupFormValidator.clearForm();
   popupEditProfile.open();
 });
 
