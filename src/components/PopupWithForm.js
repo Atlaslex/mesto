@@ -35,7 +35,6 @@ export default class PopupWithForm extends Popup {
       this._submitButtonSelector.textContent = 'Сохранение...';
       this._submitButtonSelector.disabled = true;
       this._submitCallBack(this._getInputValues(), this);
-      // this.close();
     });
     super.setEventListeners();
   }
