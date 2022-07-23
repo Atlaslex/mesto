@@ -10,6 +10,7 @@
   margin-top: 54px;
   border-radius: 2px;
   cursor: pointer;
+  width: 100%;
 }
 
 .form__save:hover {

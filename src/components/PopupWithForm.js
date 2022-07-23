@@ -7,6 +7,7 @@ export default class PopupWithForm extends Popup {
     this._errorsResetCallBack = errorsResetCallBack;
     this._submitCallBack = submitCallBack;
     this._getterCallBack = getterCallBack;
+    this._submitButtonSelector = this._popup.querySelector('.form__save');
     this._popupForm = this._popup.querySelectorAll('.form__item'); //Инпуты выбранной формы.
     this._form = this._popup.querySelector('.form'); // Выбранная форма со всем содержимым.
     this._formInputs = Array.from(this._popupForm);
@@ -16,10 +17,9 @@ export default class PopupWithForm extends Popup {
     const formInputsValue = {};
     this._formInputs.forEach((formInput) => {
       const inputName = formInput.getAttribute("name");
-      formInputsValue[inputName] = formInput.value;
+      formInputsValue[formInput.id.slice(6)] = formInput.value;
     });
-    return formInputsValue;
-
+    return formInputsValue
   }
 
   _setInputValues(values) {
@@ -32,7 +32,9 @@ export default class PopupWithForm extends Popup {
   setEventListeners() {
     this._popup.addEventListener("submit", (evt) => {
       evt.preventDefault();
-      this._submitCallBack(this._getInputValues());
+      this._submitButtonSelector.textContent = 'Сохранение...';
+      this._submitButtonSelector.disabled = true;
+      this._submitCallBack(this._getInputValues(), this);
       this.close();
     });
     super.setEventListeners();
