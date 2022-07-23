@@ -1,12 +1,12 @@
-import './pages/index.css';
-import Card from './components/Card.js';
-import FormValidator from './components/FormValidator.js';
-import Section from './components/Section.js';
-import PopupWithForm from './components/PopupWithForm.js';
-import UserInfo from './components/UserInfo.js';
-import PopupWithImage from './components/PopupWithImage';
-import Api from './components/Api';
-import { PopupWithConfirmation } from './components/PopupWithConfirmation';
+import './index.css';
+import Card from '../components/Card.js';
+import FormValidator from '../components/FormValidator.js';
+import Section from '../components/Section.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import UserInfo from '../components/UserInfo.js';
+import PopupWithImage from '../components/PopupWithImage';
+import Api from '../components/Api';
+import { PopupWithConfirmation } from '../components/PopupWithConfirmation';
 
 const validationConfig = {
   formSelector: '.form',
@@ -133,7 +133,8 @@ const handleCardSubmit = (dataCard) => {
 const popupAddCard = new PopupWithForm(
   '.popup_type_add-card',
   cardPopupFormValidator.clearForm,
-  handleCardSubmit
+  handleCardSubmit,
+  'Создать'
 );
 popupAddCard.setEventListeners();
 
@@ -163,6 +164,7 @@ const popupEditProfile = new PopupWithForm(
   ".popup_type_edit-profile",
   profilePopupFormValidator.clearForm,
   handleProfileFormSubmit,
+  'Сохранить',
   profileInfo.getUserInfo,
 );
 popupEditProfile.setEventListeners();
@@ -170,7 +172,8 @@ popupEditProfile.setEventListeners();
 const popupEditAvatar = new PopupWithForm(
   ".popup_type_edit-avatar",
   avatarPopupFormValidator.clearForm,
-  handleEditAvatarSubmit
+  handleEditAvatarSubmit,
+  'Сохранить'
 )
 popupEditAvatar.setEventListeners();
 

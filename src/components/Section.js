@@ -16,11 +16,6 @@ export default class Section {
     });
   }
 
-  prependItem(item) {
-    const element = this._renderer(item);
-    this._container.prepend(element);
-  }
-
 }
 
 
