@@ -41,7 +41,7 @@ export default class FormValidator {
   // Проверяем последовательно все поля на валидность.
   _hasInvalidInput = (inputList) => {
 
-    return inputList.some((inputElement) => {
+    return this._inputList.some((inputElement) => {
       return !inputElement.validity.valid;
     })
   };
@@ -54,7 +54,7 @@ export default class FormValidator {
   // Переключатель активности/неактивности кнопки.
   _toggleButtonState = () => {
     //Если есть невалидный инпут.
-    if (this._hasInvalidInput(this._inputList)) {
+    if (this._hasInvalidInput()) {
       // Сделать кнопку неактивной.
       this._inactiveButtonSave();
     } else {
