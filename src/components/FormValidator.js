@@ -3,6 +3,7 @@ export default class FormValidator {
     this._settings = settings;
     this._formElement = form;
     this._buttonElement = this._formElement.querySelector(this._settings.submitButtonSelector);
+    this._inputList = Array.from(this._formElement.querySelectorAll(this._settings.inputSelector));
   };
 
   //Функция, добавляющая класс с ошибкой.
@@ -66,7 +67,6 @@ export default class FormValidator {
 
   // Слушатель для всех инпутов в форме.
   _setEventListeners = () => {
-    this._inputList = Array.from(this._formElement.querySelectorAll(this._settings.inputSelector));
     // Сразу деактивируем кнопку, до ввода данных.
     this._toggleButtonState();
 
